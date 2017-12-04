@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Transitioning menu CSS / JS</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+    
+    #block {
+        width: 3000px;
+        height: 200px;
+        transition: transform 0.7s cubic-bezier(0.36, 0.36, 0.59, 1);
+        position: absolute;
+        bottom: 0px;
+    }
+    
+    .menu {
+        background: #f39;
+        width: 496px;
+        height: 200px;
+        display: inline-block;
+        margin-left: 100px;
+    }
+
+</style>
+
+<body>
+    <div id="block" onmousemove="mover(event)">
+        <div class="menu">Menu 1</div>
+        <div class="menu">Menu 2</div>
+        <div class="menu">Menu 3</div>
+        <div class="menu">Menu 4</div>
+        <div class="menu">Menu 5</div>
+    </div>
+    <script type="text/javascript">
+        var posX = 0;
+        var offset = 0;
+        var w = document.body.clientWidth;
+        var block = document.getElementById('block');
+        var diff = 3000 - w;
+
+        function map(n, start1, stop1, start2, stop2) {
+            return ((n - start1) / (stop1 - start1)) * (stop2 - start2) + start2;
+        }
+
+        function mover(e) {
+
+            posX = e.clientX;
+            offset = Math.floor(map(posX, 0, w, 0, diff));
+            offset = offset - (offset * 2);
+
+            block.style.transform = "translate(" + offset + "px)"
+
+        }
+
+    </script>
+</body>
+
+</html>
